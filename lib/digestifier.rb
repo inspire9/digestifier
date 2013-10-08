@@ -1,0 +1,3 @@
+module Digestifier
+  # Your code goes here...
+end
