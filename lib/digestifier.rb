@@ -1,3 +1,5 @@
 module Digestifier
-  # Your code goes here...
 end
+
+require 'digestifier/delivery'
+require 'digestifier/digest'
