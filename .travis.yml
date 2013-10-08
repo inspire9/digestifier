@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+  - 1.9.3
+  - 2.0.0
+notifications:
+  campfire:
+    rooms:
+      - secure: "OmCCqj/S4Yj/KzSEN7BoL86l16LhydqcJqOGMB44A/7H9ExcMfv6prD1X7or/NKaqM3IWNZX7ElvCuc8u3R8QD377ry1L+d3vqgfXSbIjKhW/g4YgktRIzBEEH37Bs/3pfcU9qtZoeEeKAM3T2pduK7OVUV64jflHQyXK0NBgig="
+    on_success: change
+    on_failure: change
