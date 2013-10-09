@@ -21,9 +21,7 @@ class Digestifier::Delivery
   delegate :default_frequency, to: :digest
 
   def contents
-    digest.contents.call.where(
-      created_at: last_sent..Time.zone.now
-    )
+    digest.contents.call(last_sent..Time.zone.now)
   end
 
   def frequency

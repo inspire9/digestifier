@@ -28,11 +28,13 @@ Digestifier.sender = 'Hello <hello@inspire9.com>'
 
 # Set the digest object to a constant so it can be referred to elsewhere.
 DIGEST = Digestifier::Digest.new
-# Set the ActiveRecord scope that returns objects for the digest.
-# This lambda needs to return a relation that responds to ActiveRecord's
-# where method (so a dynamic date filter based on the created_at column can
-# be added).
-DIGEST.contents = lambda { Article }
+# Set the lambda that returns objects for the digest. This takes a single
+# argument - the time range - and should return a collection of objects. How
+# you get this collection is up to you, but the example below is a decent
+# starting point.
+DIGEST.contents = lambda { |range|
+  Article.where(created_at: range).order(:created_at)
+}
 # The digest recipients defaults to all User objects in your system. If you
 # want to use a different class, or filter those objects, you can customise it:
 DIGEST.recipients = lambda { User }
