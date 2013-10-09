@@ -26,8 +26,15 @@ class Digestifier::Delivery
     )
   end
 
+  def frequency
+    settings = Digestifier::Setting.for recipient
+    return default_frequency unless settings.preferences['frequency']
+
+    settings.preferences['frequency']
+  end
+
   def last_sent
     receipt = Digestifier::Receipt.last_for(recipient)
-    receipt.nil? ? default_frequency.ago : receipt.captured_at
+    receipt.nil? ? frequency.ago : receipt.captured_at
   end
 end

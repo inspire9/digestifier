@@ -6,6 +6,7 @@ class CreateReceipts < ActiveRecord::Migration
       t.datetime :captured_at,    null: false
     end
 
-    add_index :digestifier_receipts, [:recipient_type, :recipient_id]
+    add_index :digestifier_receipts, [:recipient_type, :recipient_id],
+      unique: true
   end
 end

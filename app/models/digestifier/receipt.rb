@@ -3,6 +3,9 @@ class Digestifier::Receipt < ActiveRecord::Base
 
   belongs_to :recipient, polymorphic: true
 
+  validates :recipient,   presence: true
+  validates :captured_at, presence: true
+
   def self.capture(recipient)
     receipt = last_for recipient
 
