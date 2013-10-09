@@ -4,6 +4,6 @@
 
 <ul>
   <% @content_items.each do |item| %>
-    <li><%= item.name %></li>
+    <li><%= render_digest_partial item %></li>
   <% end %>
 </ul>
