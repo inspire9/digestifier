@@ -3,6 +3,6 @@ class Digestifier::Digest
 
   def initialize
     @default_frequency = 24.hours
-    @recipients        = Proc.new { User.order(:id) }
+    @recipients        = lambda { User.order(:id) }
   end
 end
