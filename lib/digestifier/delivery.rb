@@ -1,6 +1,6 @@
 class Digestifier::Delivery
   def self.deliver(digest)
-    digest.recipients.each do |recipient|
+    digest.recipients.call.each do |recipient|
       new(digest, recipient).deliver
     end
   end
