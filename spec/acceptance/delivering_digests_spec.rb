@@ -41,4 +41,20 @@ describe 'Delivering digests' do
     expect(mail.body).to match(/Recent Post/)
     expect(mail.body).to_not match(/Old Post/)
   end
+
+  it "does not include already sent items if sending sooner than expected" do
+    Article.create!(name: 'Old Post').
+      update_attribute :created_at, 13.hours.ago
+    Digestifier::Delivery.deliver digest
+    ActionMailer::Base.deliveries.clear
+
+    Article.create! name: 'Recent Post'
+    Digestifier::Delivery.deliver digest
+
+    mail = ActionMailer::Base.deliveries.detect { |mail|
+      mail.to.include?('me@somewhere.com')
+    }
+    expect(mail.body).to match(/Recent Post/)
+    expect(mail.body).to_not match(/Old Post/)
+  end
 end
