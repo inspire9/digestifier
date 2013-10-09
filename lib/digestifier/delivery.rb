@@ -17,9 +17,11 @@ class Digestifier::Delivery
 
   attr_reader :digest
 
-  delegate :recipients, to: :digest
+  delegate :default_frequency, :recipients, to: :digest
 
   def contents
-    digest.contents.call.where(created_at: 1.day.ago..Time.zone.now)
+    digest.contents.call.where(
+      created_at: default_frequency.ago..Time.zone.now
+    )
   end
 end

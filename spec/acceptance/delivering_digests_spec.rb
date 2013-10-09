@@ -25,4 +25,20 @@ describe 'Delivering digests' do
     expect(mail.body).to match(/Recent Post/)
     expect(mail.body).to_not match(/Old Post/)
   end
+
+  it "allows the digest to have a different frequency" do
+    digest.default_frequency = 12.hours
+
+    Article.create! name: 'Recent Post'
+    Article.create!(name: 'Old Post').
+      update_attribute :created_at, 13.hours.ago
+
+    Digestifier::Delivery.deliver digest
+
+    mail = ActionMailer::Base.deliveries.detect { |mail|
+      mail.to.include?('me@somewhere.com')
+    }
+    expect(mail.body).to match(/Recent Post/)
+    expect(mail.body).to_not match(/Old Post/)
+  end
 end
