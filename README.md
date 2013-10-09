@@ -82,6 +82,16 @@ The two instance variables you have access to are `@recipient` and `@content_ite
 <% end %>
 ```
 
+Also: you'll very likely want to customise the email's subject - this is done via Rails' internationalisation:
+
+```yaml
+en:
+  digestifier:
+    mailer:
+      digest:
+        subject: "The Latest News"
+```
+
 ### Customising the mailer
 
 If you want to put your own Mailer, then this is certainly possible:
