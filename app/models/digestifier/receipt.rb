@@ -4,7 +4,13 @@ class Digestifier::Receipt < ActiveRecord::Base
   belongs_to :recipient, polymorphic: true
 
   def self.capture(recipient)
-    create recipient: recipient, captured_at: Time.zone.now
+    receipt = last_for recipient
+
+    if receipt.nil?
+      create recipient: recipient, captured_at: Time.zone.now
+    else
+      receipt.update_attributes captured_at: Time.zone.now
+    end
   end
 
   def self.last_for(recipient)
