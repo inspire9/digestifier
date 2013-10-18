@@ -58,6 +58,12 @@ task :send_digest => :environment do
 end
 ```
 
+You can test sending an email to a specific recipient using the following code:
+
+```ruby
+Digestifier::Delivery.new(DIGEST, recipient).deliver
+```
+
 ### Customising partial templates
 
 This step is almost certainly essential: you'll want to customise how each item in your digest is presented. The partials for this should be located in `app/views/digestifier/mailer`, and use the item's class name, downcased and underscored (for example: `_article.html.erb` or `_comment.html.haml`).

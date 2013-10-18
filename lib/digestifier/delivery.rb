@@ -1,7 +1,7 @@
 class Digestifier::Delivery
   def self.deliver(digest)
     digest.recipients.call.find_each do |recipient|
-      new(digest, recipient).deliver
+      new(digest, recipient).deliver_and_capture
     end
   end
 
@@ -9,9 +9,17 @@ class Digestifier::Delivery
     @digest, @recipient = digest, recipient
   end
 
+  def capture
+    Digestifier::Receipt.capture recipient
+  end
+
   def deliver
     Digestifier.mailer.digest(recipient, contents).deliver
-    Digestifier::Receipt.capture recipient
+  end
+
+  def deliver_and_capture
+    deliver
+    capture
   end
 
   private
