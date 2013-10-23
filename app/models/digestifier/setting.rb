@@ -5,8 +5,7 @@ class Digestifier::Setting < ActiveRecord::Base
 
   serialize :preferences, JSON
 
-  validates :recipient,   presence: true
-  validates :preferences, presence: true
+  validates :recipient, presence: true
 
   def self.for(recipient)
     where(
