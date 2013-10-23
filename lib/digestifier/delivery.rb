@@ -14,6 +14,8 @@ class Digestifier::Delivery
   end
 
   def deliver
+    return unless settings.enabled?
+
     Digestifier.mailer.digest(recipient, contents).deliver
   end
 
@@ -33,7 +35,6 @@ class Digestifier::Delivery
   end
 
   def frequency
-    settings = Digestifier::Setting.for recipient
     return default_frequency unless settings.preferences['frequency']
 
     settings.preferences['frequency']
@@ -42,5 +43,9 @@ class Digestifier::Delivery
   def last_sent
     receipt = Digestifier::Receipt.last_for(recipient)
     receipt.nil? ? frequency.ago : receipt.captured_at
+  end
+
+  def settings
+    @settings ||= Digestifier::Setting.for recipient
   end
 end

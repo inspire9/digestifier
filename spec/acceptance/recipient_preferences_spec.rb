@@ -29,4 +29,18 @@ describe 'Custom digest frequency' do
     expect(mail.body).to match(/Recent Post/)
     expect(mail.body).to_not match(/Old Post/)
   end
+
+  it 'respects disabled digest preferences' do
+    Article.create! name: 'Recent Post'
+
+    setting = Digestifier::Setting.for(user)
+    setting.enabled = false
+    setting.save!
+
+    Digestifier::Delivery.deliver digest
+
+    ActionMailer::Base.deliveries.detect { |mail|
+      mail.to.include?('me@somewhere.com')
+    }.should be_nil
+  end
 end
