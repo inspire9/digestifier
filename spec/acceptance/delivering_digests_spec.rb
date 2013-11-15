@@ -59,4 +59,13 @@ describe 'Delivering digests' do
     expect(mail.body).to match(/Recent Post/)
     expect(mail.body).to_not match(/Old Post/)
   end
+
+  it "does not send an email if there's no items to send" do
+    Digestifier::Delivery.deliver digest
+
+    mail = ActionMailer::Base.deliveries.detect { |mail|
+      mail.to.include?('me@somewhere.com')
+    }
+    expect(mail).to be_nil
+  end
 end

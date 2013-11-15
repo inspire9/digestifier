@@ -14,7 +14,7 @@ class Digestifier::Delivery
   end
 
   def deliver
-    return unless settings.enabled?
+    return unless settings.enabled? && contents.any?
 
     Digestifier.mailer.digest(recipient, contents).deliver
   end
