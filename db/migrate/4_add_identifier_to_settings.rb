@@ -9,4 +9,8 @@ class AddIdentifierToSettings < ActiveRecord::Migration
     change_column :digestifier_settings, :identifier, :string, null: false
     add_index :digestifier_settings, :identifier, unique: true
   end
+
+  def down
+    remove_column :digestifier_settings, :identifier
+  end
 end
