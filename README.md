@@ -64,6 +64,16 @@ You can test sending an email to a specific recipient using the following code:
 Digestifier::Delivery.new(DIGEST, recipient).deliver
 ```
 
+### Unsubscribing
+
+The default emails will include an unsubscribe link at the bottom - but this requires you to mount the engine in your `config/routes.rb` file:
+
+```ruby
+mount Digestifier::Engine => '/digests'
+```
+
+You can mount it to wherever you like, of course.
+
 ### Customising partial templates
 
 This step is almost certainly essential: you'll want to customise how each item in your digest is presented. The partials for this should be located in `app/views/digestifier/mailer`, and use the item's class name, downcased and underscored (for example: `_article.html.erb` or `_comment.html.haml`).
@@ -88,6 +98,12 @@ The two instance variables you have access to are `@recipient` and `@content_ite
 <% end %>
 ```
 
+Don't forget to include an unsubscribe link:
+
+```erb
+<%= link_to 'Unsubscribe', unsubscribe_url_for(@recipient) %>
+```
+
 Also: you'll very likely want to customise the email's subject - this is done via Rails' internationalisation:
 
 ```yaml
@@ -106,7 +122,16 @@ If you want to put your own Mailer, then this is certainly possible:
 Digestifier.mailer = CustomMailer
 ```
 
-Your new mailer class should respond to `digest` and accept the following arguments: recipient and content_items.
+Your new mailer class should respond to `digest` and accept the following arguments: recipient and content_items. If you're using the `unsubscribe_url_for` method, you'll want to include the helper that provides it:
+
+```ruby
+class CustomMailer < ActionMailer::Base
+  helper 'digestifier/unsubscribes'
+  # And for partial matchers, if desired:
+  helper 'digestifier/partial'
+
+  # ...
+```
 
 ### Contributing
 
