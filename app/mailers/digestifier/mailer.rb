@@ -1,5 +1,6 @@
 class Digestifier::Mailer < ActionMailer::Base
   helper 'digestifier/partial'
+  helper 'digestifier/unsubscribes'
 
   def digest(recipient, content_items)
     @recipient     = recipient
