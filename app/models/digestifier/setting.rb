@@ -19,7 +19,7 @@ class Digestifier::Setting < ActiveRecord::Base
 
   def set_identifier!
     set_identifier
-    save
+    save!
   end
 
   private
