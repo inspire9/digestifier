@@ -6,7 +6,7 @@ A simple Rails engine for sending out email digests of activity.
 
 Add this line to your application's Gemfile:
 
-    gem 'digestifier', '0.0.5'
+    gem 'digestifier', '0.1.0'
 
 Don't forget to bundle:
 
@@ -40,6 +40,22 @@ DIGEST.contents = lambda { |range|
 DIGEST.recipients = lambda { User }
 # The default frequency is once a day.
 DIGEST.default_frequency = 24.hours
+```
+
+### Multiple Digests
+
+If you have more than one digest, then you must provide each configured digest with a unique identifier:
+
+```ruby
+NEWS_DIGEST    = Digestifier::Digest.new :news
+CHATTER_DIGEST = Digestifier::Digest.new :chatter
+```
+
+The default identifier is `:digest`, so if you are changing the name of an existing digest, you'll want to update your data (perhaps in a migration) with something like this:
+
+```ruby
+Digestifier::Receipt.update_all digest: 'chatter'
+Digestifier::Setting.update_all digest: 'chatter'
 ```
 
 ### Sending emails
@@ -135,12 +151,13 @@ class CustomMailer < ActionMailer::Base
 
 ### Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+1. Fork this repository.
+2. Install [git-flow](https://github.com/nvie/gitflow/wiki/Installation) if you don't have it already, then initialise it within your local copy of this repository (`git flow init` - we stick with the defaults).
+3. Create your feature branch (`git flow feature start my-new-feature`)
+4. Commit your changes to the feature branch.
+5. Push to the branch (`git push origin feature/my-new-feature`)
+6. Create new Pull Request against our `develop` branch.
 
 ## Licence
 
-Copyright (c) 2013, Digestifier is developed and maintained by [Inspire9](http://inspire9.com), and is released under the open MIT Licence.
+Copyright (c) 2013-2014, Digestifier is developed and maintained by [Inspire9](http://inspire9.com), and is released under the open MIT Licence.
