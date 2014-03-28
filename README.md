@@ -151,12 +151,13 @@ class CustomMailer < ActionMailer::Base
 
 ### Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+1. Fork this repository.
+2. Install [git-flow](https://github.com/nvie/gitflow/wiki/Installation) if you don't have it already, then initialise it within your local copy of this repository (`git flow init` - we stick with the defaults).
+3. Create your feature branch (`git flow feature start my-new-feature`)
+4. Commit your changes to the feature branch.
+5. Push to the branch (`git push origin feature/my-new-feature`)
+6. Create new Pull Request against our `develop` branch.
 
 ## Licence
 
-Copyright (c) 2013, Digestifier is developed and maintained by [Inspire9](http://inspire9.com), and is released under the open MIT Licence.
+Copyright (c) 2013-2014, Digestifier is developed and maintained by [Inspire9](http://inspire9.com), and is released under the open MIT Licence.
