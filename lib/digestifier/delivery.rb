@@ -10,7 +10,7 @@ class Digestifier::Delivery
   end
 
   def capture
-    Digestifier::Receipt.capture recipient
+    Digestifier::Receipt.capture recipient, digest.identifier
   end
 
   def deliver
@@ -41,7 +41,7 @@ class Digestifier::Delivery
   end
 
   def last_sent
-    receipt = Digestifier::Receipt.last_for(recipient)
+    receipt = Digestifier::Receipt.last_for(recipient, digest.identifier)
     receipt.nil? ? frequency.ago : receipt.captured_at
   end
 
