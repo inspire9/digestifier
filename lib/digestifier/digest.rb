@@ -1,7 +1,8 @@
 class Digestifier::Digest
-  attr_accessor :contents, :default_frequency, :recipients
+  attr_accessor :identifier, :contents, :default_frequency, :recipients
 
-  def initialize
+  def initialize(identifier = :digest)
+    @identifier        = identifier
     @default_frequency = 24.hours
     @recipients        = lambda { User.order(:id) }
   end
