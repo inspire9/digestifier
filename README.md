@@ -42,6 +42,22 @@ DIGEST.recipients = lambda { User }
 DIGEST.default_frequency = 24.hours
 ```
 
+### Multiple Digests
+
+If you have more than one digest, then you must provide each configured digest with a unique identifier:
+
+```ruby
+NEWS_DIGEST    = Digestifier::Digest.new :news
+CHATTER_DIGEST = Digestifier::Digest.new :chatter
+```
+
+The default identifier is `:digest`, so if you are changing the name of an existing digest, you'll want to update your data (perhaps in a migration) with something like this:
+
+```ruby
+Digestifier::Receipt.update_all digest: 'chatter'
+Digestifier::Setting.update_all digest: 'chatter'
+```
+
 ### Sending emails
 
 This will likely go in a rake task - but it's up to you.

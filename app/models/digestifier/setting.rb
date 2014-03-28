@@ -7,14 +7,16 @@ class Digestifier::Setting < ActiveRecord::Base
 
   validates :recipient,  presence: true
   validates :identifier, presence: true, uniqueness: true
+  validates :digest,     presence: true
 
   before_validation :set_identifier, on: :create
 
-  def self.for(recipient)
+  def self.for(recipient, digest = :digest)
     where(
+      digest:         digest,
       recipient_type: recipient.class.name,
       recipient_id:   recipient.id
-    ).first || create(recipient: recipient)
+    ).first || create(digest: digest, recipient: recipient)
   end
 
   def set_identifier!
