@@ -6,7 +6,7 @@ A simple Rails engine for sending out email digests of activity.
 
 Add this line to your application's Gemfile:
 
-    gem 'digestifier', '0.0.5'
+    gem 'digestifier', '0.1.0'
 
 Don't forget to bundle:
 
