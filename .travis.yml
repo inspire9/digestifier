@@ -4,8 +4,8 @@ rvm:
   - 2.0.0
   - 2.1.0
 notifications:
-  campfire:
-    rooms:
-      - secure: "OmCCqj/S4Yj/KzSEN7BoL86l16LhydqcJqOGMB44A/7H9ExcMfv6prD1X7or/NKaqM3IWNZX7ElvCuc8u3R8QD377ry1L+d3vqgfXSbIjKhW/g4YgktRIzBEEH37Bs/3pfcU9qtZoeEeKAM3T2pduK7OVUV64jflHQyXK0NBgig="
+  notifications:
+    slack:
+      - secure: "bnE9IDeEsYScneTePwEBSW6YsgzS2AHb6EAQC7oTTB1Iv1dXdt1p/LU1mBrXBj/4eGSvZxIfuWXewBgxFgX6LQHTaCNRIfCmZ/JolayEKXs1b8lQNYpIFfbaBBFCMb/+SPsZNSJo3lBCW+xsiuHhho/5tIPHU8FMB/vwALlHJi4="
     on_success: change
     on_failure: change
