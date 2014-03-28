@@ -46,6 +46,6 @@ class Digestifier::Delivery
   end
 
   def settings
-    @settings ||= Digestifier::Setting.for recipient
+    @settings ||= Digestifier::Setting.for recipient, digest.identifier
   end
 end
