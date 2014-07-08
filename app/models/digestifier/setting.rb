@@ -12,11 +12,18 @@ class Digestifier::Setting < ActiveRecord::Base
   before_validation :set_identifier, on: :create
 
   def self.for(recipient, digest = :digest)
-    where(
-      digest:         digest,
-      recipient_type: recipient.class.name,
-      recipient_id:   recipient.id
-    ).first || create(digest: digest, recipient: recipient)
+    attempts = 0
+    begin
+      where(
+        digest:         digest,
+        recipient_type: recipient.class.name,
+        recipient_id:   recipient.id
+      ).first || create(digest: digest, recipient: recipient)
+    rescue ActiveRecord::RecordNotUnique
+      attempts += 1
+      retry if attempts < 2
+      raise
+    end
   end
 
   def set_identifier!
