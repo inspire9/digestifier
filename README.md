@@ -118,6 +118,8 @@ Don't forget to include an unsubscribe link:
 
 ```erb
 <%= link_to 'Unsubscribe', unsubscribe_url_for(@recipient) %>
+<!-- Or, if you've given your digest a label: -->
+<%= link_to 'Unsubscribe', unsubscribe_url_for(@recipient, :news) %>
 ```
 
 Also: you'll very likely want to customise the email's subject - this is done via Rails' internationalisation:
