@@ -1,7 +1,7 @@
 # coding: utf-8
 Gem::Specification.new do |spec|
   spec.name          = 'digestifier'
-  spec.version       = '0.1.0'
+  spec.version       = '0.2.0'
   spec.authors       = ['Pat Allan']
   spec.email         = ['pat@freelancing-gods.com']
   spec.summary       = 'Digests as a Rails Engine'
