@@ -4,7 +4,7 @@ class CreateSettings < ActiveRecord::Migration
       t.string  :recipient_type, null: false
       t.integer :recipient_id,   null: false
       t.text    :preferences,    null: false, default: '{}'
-      t.timestamps
+      t.timestamps               null: false
     end
 
     add_index :digestifier_settings, [:recipient_type, :recipient_id],
