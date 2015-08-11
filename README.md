@@ -152,6 +152,8 @@ class CustomMailer < ActionMailer::Base
 
 ### Contributing
 
+Please note that this project is released with [a Contributor Code of Conduct](http://contributor-covenant.org/version/1/2/0/). By participating in this project you agree to abide by its terms.
+
 1. Fork this repository.
 2. Install [git-flow](https://github.com/nvie/gitflow/wiki/Installation) if you don't have it already, then initialise it within your local copy of this repository (`git flow init` - we stick with the defaults).
 3. Create your feature branch (`git flow feature start my-new-feature`)
@@ -161,4 +163,4 @@ class CustomMailer < ActionMailer::Base
 
 ## Licence
 
-Copyright (c) 2013-2014, Digestifier is developed and maintained by [Inspire9](http://inspire9.com), and is released under the open MIT Licence.
+Copyright (c) 2013-2015, Digestifier is developed and maintained by [Inspire9](http://inspire9.com), and is released under the open MIT Licence.
