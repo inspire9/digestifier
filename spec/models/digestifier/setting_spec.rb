@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Digestifier::Setting do
+RSpec.describe Digestifier::Setting, type: :model do
   describe '.for' do
     let(:setting)   { double 'Setting' }
     let(:recipient) { double 'Recipient', id: 389 }

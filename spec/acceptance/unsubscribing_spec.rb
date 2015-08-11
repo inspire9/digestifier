@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Unsubscribing' do
+RSpec.describe 'Unsubscribing', type: :request do
   let(:user) { User.create! email: 'me@somewhere.com' }
 
   it "marks a user as unsubscribed" do

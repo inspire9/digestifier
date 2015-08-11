@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Custom digest frequency' do
+RSpec.describe 'Custom digest frequency' do
   let(:digest) { Digestifier::Digest.new }
   let(:user)   { User.create! email: 'me@somewhere.com' }
 

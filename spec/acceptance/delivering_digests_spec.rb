@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Delivering digests' do
+RSpec.describe 'Delivering digests' do
   let(:digest) { Digestifier::Digest.new }
   let(:user)   { User.create! email: 'me@somewhere.com' }
 

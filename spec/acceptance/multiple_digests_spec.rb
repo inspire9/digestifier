@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Multiple Digests' do
+RSpec.describe 'Multiple Digests' do
   let(:food_digest) { Digestifier::Digest.new :food }
   let(:tech_digest) { Digestifier::Digest.new :tech }
   let(:user)   { User.create! email: 'me@somewhere.com' }
