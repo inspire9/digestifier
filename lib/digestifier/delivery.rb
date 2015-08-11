@@ -42,7 +42,7 @@ class Digestifier::Delivery
 
   def last_sent
     receipt = Digestifier::Receipt.last_for(recipient, digest.identifier)
-    receipt.nil? ? frequency.ago : receipt.captured_at
+    receipt.nil? ? frequency.to_i.seconds.ago : receipt.captured_at
   end
 
   def settings
