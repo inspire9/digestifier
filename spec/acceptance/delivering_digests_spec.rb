@@ -7,7 +7,7 @@ RSpec.describe 'Delivering digests' do
   before :each do
     ActionMailer::Base.deliveries.clear
 
-    digest.contents = lambda { |range|
+    digest.contents = lambda { |user, range|
       Article.where(created_at: range).order(:created_at)
     }
 

@@ -7,7 +7,7 @@ RSpec.describe 'Custom digest partials' do
   before :each do
     ActionMailer::Base.deliveries.clear
 
-    digest.contents = lambda { |range|
+    digest.contents = lambda { |user, range|
       Book.where(created_at: range).order(:created_at)
     }
 

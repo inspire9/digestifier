@@ -8,10 +8,10 @@ RSpec.describe 'Multiple Digests' do
   before :each do
     ActionMailer::Base.deliveries.clear
 
-    food_digest.contents = lambda { |range|
+    food_digest.contents = lambda { |user, range|
       Article.category('food').where(created_at: range).order(:created_at)
     }
-    tech_digest.contents = lambda { |range|
+    tech_digest.contents = lambda { |user, range|
       Article.category('tech').where(created_at: range).order(:created_at)
     }
 
