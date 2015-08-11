@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe 'Delivering digests' do
+RSpec.describe 'Delivering digests' do
   let(:digest) { Digestifier::Digest.new }
   let(:user)   { User.create! email: 'me@somewhere.com' }
 
   before :each do
     ActionMailer::Base.deliveries.clear
 
-    digest.contents = lambda { |range|
+    digest.contents = lambda { |user, range|
       Article.where(created_at: range).order(:created_at)
     }
 

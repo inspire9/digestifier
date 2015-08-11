@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe 'Custom digest partials' do
+RSpec.describe 'Custom digest partials' do
   let(:digest) { Digestifier::Digest.new }
   let(:user)   { User.create! email: 'me@somewhere.com' }
 
   before :each do
     ActionMailer::Base.deliveries.clear
 
-    digest.contents = lambda { |range|
+    digest.contents = lambda { |user, range|
       Book.where(created_at: range).order(:created_at)
     }
 

@@ -13,7 +13,4 @@ Dir["./spec/support/**/*.rb"].each { |file| require file }
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = true
-
-  config.include RSpec::Rails::RequestExampleGroup, type: :request,
-    example_group: {file_path: /spec\/acceptance/}
 end

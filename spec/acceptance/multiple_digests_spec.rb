@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Multiple Digests' do
+RSpec.describe 'Multiple Digests' do
   let(:food_digest) { Digestifier::Digest.new :food }
   let(:tech_digest) { Digestifier::Digest.new :tech }
   let(:user)   { User.create! email: 'me@somewhere.com' }
@@ -8,10 +8,10 @@ describe 'Multiple Digests' do
   before :each do
     ActionMailer::Base.deliveries.clear
 
-    food_digest.contents = lambda { |range|
+    food_digest.contents = lambda { |user, range|
       Article.category('food').where(created_at: range).order(:created_at)
     }
-    tech_digest.contents = lambda { |range|
+    tech_digest.contents = lambda { |user, range|
       Article.category('tech').where(created_at: range).order(:created_at)
     }
 
@@ -85,16 +85,16 @@ describe 'Multiple Digests' do
 
     Digestifier::Delivery.deliver food_digest
 
-    ActionMailer::Base.deliveries.detect { |mail|
+    expect(ActionMailer::Base.deliveries.detect { |mail|
       mail.to.include?('me@somewhere.com')
-    }.should_not be_nil
+    }).not_to be_nil
 
     ActionMailer::Base.deliveries.clear
 
     Digestifier::Delivery.deliver tech_digest
 
-    ActionMailer::Base.deliveries.detect { |mail|
+    expect(ActionMailer::Base.deliveries.detect { |mail|
       mail.to.include?('me@somewhere.com')
-    }.should be_nil
+    }).to be_nil
   end
 end

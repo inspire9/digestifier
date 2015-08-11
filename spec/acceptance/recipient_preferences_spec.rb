@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe 'Custom digest frequency' do
+RSpec.describe 'Custom digest frequency' do
   let(:digest) { Digestifier::Digest.new }
   let(:user)   { User.create! email: 'me@somewhere.com' }
 
   before :each do
     ActionMailer::Base.deliveries.clear
 
-    digest.contents = lambda { |range|
+    digest.contents = lambda { |user, range|
       Article.where(created_at: range).order(:created_at)
     }
   end
@@ -39,8 +39,8 @@ describe 'Custom digest frequency' do
 
     Digestifier::Delivery.deliver digest
 
-    ActionMailer::Base.deliveries.detect { |mail|
+    expect(ActionMailer::Base.deliveries.detect { |mail|
       mail.to.include?('me@somewhere.com')
-    }.should be_nil
+    }).to be_nil
   end
 end

@@ -1,7 +1,7 @@
 class Digestifier::Delivery
   def self.deliver(digest)
     digest.recipients.call.find_each do |recipient|
-      new(digest, recipient).deliver_and_capture
+      Digestifier::Delivery.new(digest, recipient).deliver_and_capture
     end
   end
 
@@ -31,7 +31,7 @@ class Digestifier::Delivery
   delegate :default_frequency, to: :digest
 
   def contents
-    digest.contents.call(last_sent..Time.zone.now)
+    digest.contents.call(recipient, last_sent..Time.zone.now)
   end
 
   def frequency
@@ -42,7 +42,7 @@ class Digestifier::Delivery
 
   def last_sent
     receipt = Digestifier::Receipt.last_for(recipient, digest.identifier)
-    receipt.nil? ? frequency.ago : receipt.captured_at
+    receipt.nil? ? frequency.to_i.seconds.ago : receipt.captured_at
   end
 
   def settings

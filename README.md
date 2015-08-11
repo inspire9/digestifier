@@ -6,7 +6,7 @@ A simple Rails engine for sending out email digests of activity.
 
 Add this line to your application's Gemfile:
 
-    gem 'digestifier', '0.1.0'
+    gem 'digestifier', '0.2.0'
 
 Don't forget to bundle:
 
@@ -28,11 +28,10 @@ Digestifier.sender = 'Hello <hello@inspire9.com>'
 
 # Set the digest object to a constant so it can be referred to elsewhere.
 DIGEST = Digestifier::Digest.new
-# Set the lambda that returns objects for the digest. This takes a single
-# argument - the time range - and should return a collection of objects. How
-# you get this collection is up to you, but the example below is a decent
-# starting point.
-DIGEST.contents = lambda { |range|
+# Set the lambda that returns objects for the digest. This takes two arguments # - the recipient in question, and the time range - and should return a
+# collection of objects. How you get this collection is up to you, but the
+# example below is a decent starting point.
+DIGEST.contents = lambda { |recipient, range|
   Article.where(created_at: range).order(:created_at)
 }
 # The digest recipients defaults to all User objects in your system. If you
@@ -118,6 +117,8 @@ Don't forget to include an unsubscribe link:
 
 ```erb
 <%= link_to 'Unsubscribe', unsubscribe_url_for(@recipient) %>
+<!-- Or, if you've given your digest a label: -->
+<%= link_to 'Unsubscribe', unsubscribe_url_for(@recipient, :news) %>
 ```
 
 Also: you'll very likely want to customise the email's subject - this is done via Rails' internationalisation:
@@ -151,6 +152,8 @@ class CustomMailer < ActionMailer::Base
 
 ### Contributing
 
+Please note that this project is released with [a Contributor Code of Conduct](http://contributor-covenant.org/version/1/2/0/). By participating in this project you agree to abide by its terms.
+
 1. Fork this repository.
 2. Install [git-flow](https://github.com/nvie/gitflow/wiki/Installation) if you don't have it already, then initialise it within your local copy of this repository (`git flow init` - we stick with the defaults).
 3. Create your feature branch (`git flow feature start my-new-feature`)
@@ -160,4 +163,4 @@ class CustomMailer < ActionMailer::Base
 
 ## Licence
 
-Copyright (c) 2013-2014, Digestifier is developed and maintained by [Inspire9](http://inspire9.com), and is released under the open MIT Licence.
+Copyright (c) 2013-2015, Digestifier is developed and maintained by [Inspire9](http://inspire9.com), and is released under the open MIT Licence.
