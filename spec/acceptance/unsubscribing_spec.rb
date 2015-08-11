@@ -5,11 +5,11 @@ describe 'Unsubscribing' do
 
   it "marks a user as unsubscribed" do
     setting = Digestifier::Setting.for(user)
-    expect(setting.enabled).to be_true
+    expect(setting.enabled).to eq(true)
 
     get "/digests/unsubscribe/#{setting.identifier}"
 
     setting.reload
-    expect(setting.enabled).to be_false
+    expect(setting.enabled).to eq(false)
   end
 end

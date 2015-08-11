@@ -39,8 +39,8 @@ describe 'Custom digest frequency' do
 
     Digestifier::Delivery.deliver digest
 
-    ActionMailer::Base.deliveries.detect { |mail|
+    expect(ActionMailer::Base.deliveries.detect { |mail|
       mail.to.include?('me@somewhere.com')
-    }.should be_nil
+    }).to be_nil
   end
 end

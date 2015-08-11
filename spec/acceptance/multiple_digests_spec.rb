@@ -85,16 +85,16 @@ describe 'Multiple Digests' do
 
     Digestifier::Delivery.deliver food_digest
 
-    ActionMailer::Base.deliveries.detect { |mail|
+    expect(ActionMailer::Base.deliveries.detect { |mail|
       mail.to.include?('me@somewhere.com')
-    }.should_not be_nil
+    }).not_to be_nil
 
     ActionMailer::Base.deliveries.clear
 
     Digestifier::Delivery.deliver tech_digest
 
-    ActionMailer::Base.deliveries.detect { |mail|
+    expect(ActionMailer::Base.deliveries.detect { |mail|
       mail.to.include?('me@somewhere.com')
-    }.should be_nil
+    }).to be_nil
   end
 end
